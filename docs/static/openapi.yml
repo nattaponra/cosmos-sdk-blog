@@ -51242,6 +51242,12 @@ definitions:
       createdAt:
         type: string
         format: int64
+  username.blog.blog.MsgCreateCommentResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uint64
   username.blog.blog.MsgCreatePostResponse:
     type: object
     properties:
