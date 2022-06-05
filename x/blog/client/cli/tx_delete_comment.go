@@ -1,13 +1,13 @@
 package cli
 
 import (
-    "strconv"
-	
-	 "github.com/spf13/cast"
-	"github.com/spf13/cobra"
-    "github.com/cosmos/cosmos-sdk/client"
+	"strconv"
+
+	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
+	"github.com/spf13/cast"
+	"github.com/spf13/cobra"
 	"github.com/username/blog/x/blog/types"
 )
 
@@ -19,15 +19,15 @@ func CmdDeleteComment() *cobra.Command {
 		Short: "Broadcast message delete-comment",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-      		 argCommentID, err := cast.ToUint64E(args[0])
-            		if err != nil {
-                		return err
-            		}
-             argPostID, err := cast.ToUint64E(args[1])
-            		if err != nil {
-                		return err
-            		}
-            
+			argCommentID, err := cast.ToUint64E(args[0])
+			if err != nil {
+				return err
+			}
+			argPostID, err := cast.ToUint64E(args[1])
+			if err != nil {
+				return err
+			}
+
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
@@ -37,7 +37,6 @@ func CmdDeleteComment() *cobra.Command {
 				clientCtx.GetFromAddress().String(),
 				argCommentID,
 				argPostID,
-				
 			)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
@@ -48,5 +47,5 @@ func CmdDeleteComment() *cobra.Command {
 
 	flags.AddTxFlagsToCmd(cmd)
 
-    return cmd
+	return cmd
 }
