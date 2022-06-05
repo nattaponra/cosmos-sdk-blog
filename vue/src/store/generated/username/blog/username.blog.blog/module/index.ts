@@ -6,11 +6,13 @@ import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "
 import { Api } from "./rest";
 import { MsgCreatePost } from "./types/blog/tx";
 import { MsgCreateComment } from "./types/blog/tx";
+import { MsgDeleteComment } from "./types/blog/tx";
 
 
 const types = [
   ["/username.blog.blog.MsgCreatePost", MsgCreatePost],
   ["/username.blog.blog.MsgCreateComment", MsgCreateComment],
+  ["/username.blog.blog.MsgDeleteComment", MsgDeleteComment],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -45,6 +47,7 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
     msgCreatePost: (data: MsgCreatePost): EncodeObject => ({ typeUrl: "/username.blog.blog.MsgCreatePost", value: MsgCreatePost.fromPartial( data ) }),
     msgCreateComment: (data: MsgCreateComment): EncodeObject => ({ typeUrl: "/username.blog.blog.MsgCreateComment", value: MsgCreateComment.fromPartial( data ) }),
+    msgDeleteComment: (data: MsgDeleteComment): EncodeObject => ({ typeUrl: "/username.blog.blog.MsgDeleteComment", value: MsgDeleteComment.fromPartial( data ) }),
     
   };
 };
